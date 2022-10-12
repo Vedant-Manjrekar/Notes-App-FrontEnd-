@@ -1,0 +1,169 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+$stretch: -webkit-fill-available;
+
+body{
+    height: 100vh;
+    position: relative;
+    font-family: sans-serif;
+    transition: .5s;
+}
+
+.navbar{
+    background-color: #8080802b;
+    height: 2rem;
+
+    p{
+        position: relative;
+        margin-left: auto;
+        transform: translateX(2rem);
+    }
+
+    .theme-toggler{
+        transition: 1s;
+        position: relative;
+        margin-left: auto;
+        border: none;
+        background-color: transparent;
+    }
+
+}
+
+.add--btn{
+    cursor: pointer;
+    width: 4rem;
+    height: 4rem;
+    font-size: 10vh;
+    border-radius: 50%;
+    border: none;
+    position: fixed;
+    background-color: transparent;
+    bottom: 2rem;
+    right: 2rem;
+}
+
+.addField--btn{
+    opacity: 0;
+}
+
+.notes--body{
+    display: grid;
+    grid-template-columns: 0fr 0fr 0fr 0fr;
+    justify-content: center;
+}
+
+.delete{
+    display: flex;
+    justify-content: flex-end;
+    cursor: pointer;
+
+    .MuiSvgIcon-root{
+        cursor: pointer;
+    }
+
+    &:hover{
+        color: rgb(240, 78, 78);
+    }
+}
+
+.note--body{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    gap: 1rem;
+    width: 11rem;
+    height: fit-content;
+    padding: 1rem;
+    margin: 2rem 1rem;
+    border-radius: 12px;
+    background-color: #333333;
+    // background: linear-gradient(145deg, #cacaca, #f0f0f0);
+}
+
+.note--body:hover{
+    .addField--btn{
+        opacity: 1;
+    }
+}
+
+.note--heading{
+    display: flex;
+    justify-content: space-between;
+    
+    p{
+     margin-right: 0rem;
+     width: $stretch;;
+    }
+
+    .heading--holder{
+        font-weight: bold;
+        font-size: large;
+        padding: .5rem;
+    }
+
+}
+
+.navbar{
+    display: flex;
+    align-items: center;
+    padding: .5rem;
+    justify-content: center;
+    font-size: 4vh;
+}
+    
+.color{
+    display: flex;
+    justify-content: flex-end;
+
+    input{
+        position: fixed;
+        opacity: 0;
+        cursor: pointer;
+    }
+
+}
+
+#heading{
+    height: 2rem;
+    font-size: 1.8rem;
+    width: $stretch;
+}
+
+.textBox{
+    display: flex;
+    justify-content: space-between;
+    gap: .5rem;
+    white-space: pre-wrap;
+}
+
+@media (min-width: 0px) and (max-width: 485px){
+    .notes--body{
+        display: grid;
+        grid-template-columns: 0fr;
+        justify-content: center;
+    }    
+}
+
+@media (min-width: 486px) and (max-width: 725px){
+    .notes--body{
+        display: grid;
+        grid-template-columns: 0fr 0fr;
+        justify-content: center;
+    }    
+}
+
+@media (min-width: 726px) and (max-width: 990px){
+    .notes--body{
+        display: grid;
+        grid-template-columns: 0fr 0fr 0fr;
+        justify-content: center;
+    }    
+
+    .add--btn{
+        right: 3rem;
+        bottom: 3rem;
+    }
+}

@@ -1,0 +1,210 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  height: 100vh;
+  position: relative;
+  font-family: sans-serif;
+  -webkit-transition: .5s;
+  transition: .5s;
+}
+
+.navbar {
+  background-color: #8080802b;
+  height: 2rem;
+}
+
+.navbar p {
+  position: relative;
+  margin-left: auto;
+  -webkit-transform: translateX(2rem);
+          transform: translateX(2rem);
+}
+
+.navbar .theme-toggler {
+  -webkit-transition: 1s;
+  transition: 1s;
+  position: relative;
+  margin-left: auto;
+  border: none;
+  background-color: transparent;
+}
+
+.add--btn {
+  cursor: pointer;
+  width: 4rem;
+  height: 4rem;
+  font-size: 10vh;
+  border-radius: 50%;
+  border: none;
+  position: fixed;
+  background-color: transparent;
+  bottom: 2rem;
+  right: 2rem;
+}
+
+.addField--btn {
+  opacity: 0;
+}
+
+.notes--body {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 0fr 0fr 0fr 0fr;
+      grid-template-columns: 0fr 0fr 0fr 0fr;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.delete {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  cursor: pointer;
+}
+
+.delete .MuiSvgIcon-root {
+  cursor: pointer;
+}
+
+.delete:hover {
+  color: #f04e4e;
+}
+
+.note--body {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  gap: 1rem;
+  width: 11rem;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  padding: 1rem;
+  margin: 2rem 1rem;
+  border-radius: 12px;
+  background-color: #333333;
+}
+
+.note--body:hover .addField--btn {
+  opacity: 1;
+}
+
+.note--heading {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.note--heading p {
+  margin-right: 0rem;
+  width: -webkit-fill-available;
+}
+
+.note--heading .heading--holder {
+  font-weight: bold;
+  font-size: large;
+  padding: .5rem;
+}
+
+.navbar {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: .5rem;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  font-size: 4vh;
+}
+
+.color {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+}
+
+.color input {
+  position: fixed;
+  opacity: 0;
+  cursor: pointer;
+}
+
+#heading {
+  height: 2rem;
+  font-size: 1.8rem;
+  width: -webkit-fill-available;
+}
+
+.textBox {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  gap: .5rem;
+  white-space: pre-wrap;
+}
+
+@media (min-width: 0px) and (max-width: 485px) {
+  .notes--body {
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: 0fr;
+        grid-template-columns: 0fr;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
+}
+
+@media (min-width: 486px) and (max-width: 725px) {
+  .notes--body {
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: 0fr 0fr;
+        grid-template-columns: 0fr 0fr;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
+}
+
+@media (min-width: 726px) and (max-width: 990px) {
+  .notes--body {
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: 0fr 0fr 0fr;
+        grid-template-columns: 0fr 0fr 0fr;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
+  .add--btn {
+    right: 3rem;
+    bottom: 3rem;
+  }
+}
+/*# sourceMappingURL=main.css.map */
