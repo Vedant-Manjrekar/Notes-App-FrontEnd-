@@ -51,5 +51,6 @@
   "main": "Notes.js",
   "author": "Vedant M.",
   "license": "ISC",
-  "description": ""
+  "description": "",
+  "proxy": "https://notes-web-application1.herokuapp.com"
 }
