@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const instance = axios.create({
-  baseURL: "https://localhost:9000",
+  baseURL: "https://notes-web-application1.herokuapp.com",
 });
 
 export default instance;
