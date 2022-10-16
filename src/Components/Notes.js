@@ -18,9 +18,9 @@ function Notes({ id, heading, body, color }) {
   const globalstate = useSelector((state) => state.update.data);
   const themeState = useSelector((state) => state.theme.data);
 
-  console.log(text);
-  console.log(heading);
-  console.log(heading);
+  // console.log(text);
+  // console.log(heading);
+  // console.log(heading);
 
   // ? CSS for Note Body. (changes according to light and dark mode.)
   const note_css = {
@@ -51,7 +51,7 @@ function Notes({ id, heading, body, color }) {
       },
     });
 
-    console.log("Changed Color");
+    // console.log("Changed Color");
   }
 
   // * Function to Delete Note

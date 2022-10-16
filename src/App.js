@@ -53,14 +53,14 @@ function App() {
 
   useEffect(() => {
     axios.get("/notes/sync").then((response) => {
-      console.log(response.data);
+      // console.log(response.data);
       setNotes(response.data);
     });
   }, [globalstate]);
 
-  console.log(globalstate.color);
+  // console.log(globalstate.color);
 
-  console.log(notes);
+  // console.log(notes);
 
   useEffect(() => {
     const pusher = new Pusher("1c11be6060df351fd17f", {
@@ -79,7 +79,7 @@ function App() {
     };
   }, [notes]);
 
-  console.log(notes);
+  // console.log(notes);
 
   function addNote() {
     axios.post("/notes/new", {
@@ -99,7 +99,7 @@ function App() {
       <div className="notes--body">
         <Suspense fallback={"Loading..."}>
           {notes.map((note) => {
-            console.log(note.value);
+            // console.log(note.value);
             return (
               <Notes
                 key={note._id}

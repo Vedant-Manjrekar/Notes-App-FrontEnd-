@@ -20,7 +20,7 @@ function Nav() {
     );
   }
 
-  console.log(globalState);
+  // console.log(globalState);
 
   return (
     <nav className="navbar">
