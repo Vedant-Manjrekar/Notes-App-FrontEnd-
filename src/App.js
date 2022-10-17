@@ -4,24 +4,18 @@ import Notes from "./Components/Notes";
 import { Suspense, useEffect, useState } from "react";
 import Pusher from "pusher-js";
 import axios from "./axios";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
+import { toggleUpdate } from "./features/updateSlice";
 
 function App() {
   const [notes, setNotes] = useState([]);
-  const [addClick, setAddClick] = useState(false);
   const globalstate = useSelector((state) => state.update.data);
   const themeState = useSelector((state) => state.theme.data);
+  const dispatch = useDispatch();
 
   const body = document.querySelector("body");
   body.style.backgroundColor = themeState.data ? "#202023" : "#ffffff";
-
-  // * loading new data once there is a change in notes collection.
-  useEffect(() => {
-    axios.get("/notes/sync").then((response) => {
-      setNotes(response.data);
-    });
-  }, [addClick]);
 
   // * loading new data once there is a change in fields.
   // * [globalstate.value] is indicator of change in fields.
@@ -47,8 +41,19 @@ function App() {
     };
   }, [notes]);
 
+  // * Function to update the flag in global state to represent change in note.
+  function changedFlag(value) {
+    dispatch(
+      toggleUpdate({
+        value: !value,
+      })
+    );
+  }
+
   function addNote() {
-    setAddClick((prev) => !prev);
+    changedFlag(globalstate.value);
+
+    console.log(globalstate.value);
 
     axios.post("/notes/new", {
       value: {

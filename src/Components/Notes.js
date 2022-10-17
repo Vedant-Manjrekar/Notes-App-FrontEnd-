@@ -27,10 +27,10 @@ function Notes({ id, heading, body, color }) {
   };
 
   // * Function to update the flag in global state to represent change in note.
-  function changedFlag() {
+  function changedFlag(flag) {
     dispatch(
       toggleUpdate({
-        value: !globalstate.value,
+        value: !flag,
       })
     );
   }
@@ -45,14 +45,14 @@ function Notes({ id, heading, body, color }) {
       },
     });
 
-    changedFlag();
+    changedFlag(globalstate.value);
   }
 
   // * Function to Delete Note
   function deleteNote() {
-    axios.delete(`/delete/${id}`).then((response) => console.log(response));
+    changedFlag(globalstate.value);
 
-    changedFlag();
+    axios.delete(`/delete/${id}`).then((response) => console.log(response));
   }
 
   // * functions to change heading values.
@@ -75,7 +75,7 @@ function Notes({ id, heading, body, color }) {
         : document.getElementById("heading")?.value
     );
 
-    changedFlag();
+    changedFlag(globalstate.value);
   }
 
   // * Logic for toggling the visibilty of input text.
@@ -85,7 +85,7 @@ function Notes({ id, heading, body, color }) {
 
   // * Functions to Update Text field.
   function updateTxtFn(event) {
-    changedFlag();
+    changedFlag(globalstate.value);
 
     // * Removes input text.
     setOpenInput((prev) => !prev);
