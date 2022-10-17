@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import axios from "../axios";
-import Pusher from "pusher-js";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleUpdate } from "../features/updateSlice";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -13,14 +12,9 @@ function Notes({ id, heading, body, color }) {
   let [head, setHead] = useState(heading);
   let [openInput, setOpenInput] = useState(false);
   let [headingInp, setHeadingInp] = useState(false);
-  const [changeSignal, setChangeSignal] = useState(false);
   const dispatch = useDispatch();
   const globalstate = useSelector((state) => state.update.data);
   const themeState = useSelector((state) => state.theme.data);
-
-  // console.log(text);
-  // console.log(heading);
-  // console.log(heading);
 
   // ? CSS for Note Body. (changes according to light and dark mode.)
   const note_css = {
@@ -30,18 +24,20 @@ function Notes({ id, heading, body, color }) {
       : `linear-gradient(145deg, ${color}, #f0f0f0)`,
     border: themeState.data ? ".8px solid white" : ".8px solid gray",
     color: themeState.data ? "white" : "black",
-    // boxShadow: themeState.data
-    //   ? "none"
-    //   : "20px 20px 60px #b5b5b5, -20px -20px 60px #ffffff",
   };
+
+  // * Function to update the flag in global state to represent change in note.
+  function changedFlag() {
+    dispatch(
+      toggleUpdate({
+        value: !globalstate.value,
+      })
+    );
+  }
 
   // * Function to change color of Note.
   function changeColor(e) {
-    dispatch(
-      toggleUpdate({
-        data: { ...globalstate.value, color: e.target.value },
-      })
-    );
+    changedFlag();
 
     axios.patch(`/update/${id}`, {
       value: {
@@ -50,29 +46,22 @@ function Notes({ id, heading, body, color }) {
         color: e.target.value,
       },
     });
-
-    // console.log("Changed Color");
   }
 
   // * Function to Delete Note
   function deleteNote() {
+    changedFlag();
+
     axios.delete(`/delete/${id}`).then((response) => console.log(response));
-    dispatch(
-      toggleUpdate({
-        data: { value: changeSignal, color },
-      })
-    );
   }
 
   // * functions to change heading values.
   function updateHeadFn() {
-    dispatch(
-      toggleUpdate({
-        data: { value: changeSignal, color },
-      })
-    );
+    changedFlag();
 
+    // * Sets visibility of input text of Heading.
     setHeadingInp((prev) => !prev);
+
     axios.patch(`/update/${id}`, {
       value: {
         heading: document.getElementById("heading")?.value,
@@ -81,12 +70,12 @@ function Notes({ id, heading, body, color }) {
       },
     });
 
+    // * Function to display text when input box is removed.
     setHead((prevHead) =>
       document.getElementById("heading")?.value == ""
         ? prevHead
         : document.getElementById("heading")?.value
     );
-    setChangeSignal((prev) => !prev);
   }
 
   // * Logic for toggling the visibilty of input text.
@@ -96,15 +85,12 @@ function Notes({ id, heading, body, color }) {
 
   // * Functions to Update Text field.
   function updateTxtFn(event) {
-    dispatch(
-      toggleUpdate({
-        data: { value: changeSignal, color },
-      })
-    );
+    changedFlag();
 
-    // Removes input text.
+    // * Removes input text.
     setOpenInput((prev) => !prev);
 
+    // * CRUD Request for updating the text in Heading.
     axios.patch(`/update/${id}`, {
       value: {
         heading,
@@ -114,7 +100,6 @@ function Notes({ id, heading, body, color }) {
     });
 
     setText(document.getElementById("textBox")?.value);
-    setChangeSignal((prev) => !prev);
   }
 
   // * Function to make text field visble/invisible

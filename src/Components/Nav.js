@@ -20,8 +20,6 @@ function Nav() {
     );
   }
 
-  // console.log(globalState);
-
   return (
     <nav className="navbar">
       <p style={theme}>Notes App</p>

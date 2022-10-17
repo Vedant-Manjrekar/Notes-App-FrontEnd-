@@ -16,51 +16,20 @@ function App() {
   const body = document.querySelector("body");
   body.style.backgroundColor = themeState.data ? "#202023" : "#ffffff";
 
-  const theme = {
-    backgroundColor: themeState.data && "#202023",
-    color: themeState.data ? "white" : "white",
-    backgroundColor: themeState.data ? "#333333" : "#9cd14c",
-  };
-
   // * loading new data once there is a change in notes collection.
   useEffect(() => {
     axios.get("/notes/sync").then((response) => {
-      console.log(response.data);
       setNotes(response.data);
     });
   }, [addClick]);
 
   // * loading new data once there is a change in fields.
-  // * [globalstate] is indicator of change in fields.
-
-  // useEffect(() => {
-  //   axios.get("/notes/sync").then((response) => {
-  //     console.log(response.data);
-  //     setNotes(response.data);
-  //   });
-  // }, [colorsArr]);
-
-  // for (const color in notes.value) {
-  //   console.log(color);
-  // }
-
-  // let prop = notes.filter((note) => note);
-
-  // const colorsArr = [];
-
-  // prop.map((val) => colorsArr.push(val.value.color));
-  // prop.filter((val) => val.value.color);
-
+  // * [globalstate.value] is indicator of change in fields.
   useEffect(() => {
     axios.get("/notes/sync").then((response) => {
-      // console.log(response.data);
       setNotes(response.data);
     });
-  }, [globalstate]);
-
-  // console.log(globalstate.color);
-
-  // console.log(notes);
+  }, [globalstate.value]);
 
   useEffect(() => {
     const pusher = new Pusher("1c11be6060df351fd17f", {
@@ -69,7 +38,6 @@ function App() {
 
     const channel = pusher.subscribe("notes");
     channel.bind("inserted", function (data) {
-      // alert(JSON.stringify(data));
       setNotes([...notes, data]);
     });
 
@@ -79,9 +47,9 @@ function App() {
     };
   }, [notes]);
 
-  // console.log(notes);
-
   function addNote() {
+    setAddClick((prev) => !prev);
+
     axios.post("/notes/new", {
       value: {
         heading: "Add Heading",
@@ -89,7 +57,6 @@ function App() {
         color: globalstate.color,
       },
     });
-    setAddClick((prev) => !prev);
   }
 
   return (
