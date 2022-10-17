@@ -37,8 +37,6 @@ function Notes({ id, heading, body, color }) {
 
   // * Function to change color of Note.
   function changeColor(e) {
-    changedFlag();
-
     axios.patch(`/update/${id}`, {
       value: {
         heading,
@@ -46,19 +44,19 @@ function Notes({ id, heading, body, color }) {
         color: e.target.value,
       },
     });
+
+    changedFlag();
   }
 
   // * Function to Delete Note
   function deleteNote() {
-    changedFlag();
-
     axios.delete(`/delete/${id}`).then((response) => console.log(response));
+
+    changedFlag();
   }
 
   // * functions to change heading values.
   function updateHeadFn() {
-    changedFlag();
-
     // * Sets visibility of input text of Heading.
     setHeadingInp((prev) => !prev);
 
@@ -76,6 +74,8 @@ function Notes({ id, heading, body, color }) {
         ? prevHead
         : document.getElementById("heading")?.value
     );
+
+    changedFlag();
   }
 
   // * Logic for toggling the visibilty of input text.
