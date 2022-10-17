@@ -57,6 +57,8 @@ function Notes({ id, heading, body, color }) {
 
   // * functions to change heading values.
   function updateHeadFn() {
+    changedFlag(globalstate.value);
+
     // * Sets visibility of input text of Heading.
     setHeadingInp((prev) => !prev);
 
@@ -74,8 +76,6 @@ function Notes({ id, heading, body, color }) {
         ? prevHead
         : document.getElementById("heading")?.value
     );
-
-    changedFlag(globalstate.value);
   }
 
   // * Logic for toggling the visibilty of input text.
